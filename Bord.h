@@ -24,8 +24,11 @@ public:
     void die(float gapDist = 1000);
     void think(); // Thinks and flaps (or doesn't)
 
+
     float getY() { return y; }
     float getHeight() { return height; }
+
+    float isDead() { return dead; }
 };
 
 #endif //BORD_H
