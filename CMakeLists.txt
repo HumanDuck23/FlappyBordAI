@@ -22,8 +22,10 @@ if (NOT ${LIB1}_FOUND)
 endif()
 
 add_executable(FlappyBordAI main.cpp
+        Bord.h
         GameRect.h
-        GameRect.cpp)
+        GameRect.cpp
+        Bord.cpp)
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
 target_link_libraries(FlappyBordAI PRIVATE ${LIB1})
