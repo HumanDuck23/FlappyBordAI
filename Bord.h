@@ -25,6 +25,7 @@ public:
     void think(); // Thinks and flaps (or doesn't)
 
     float getY() { return y; }
+    float getHeight() { return height; }
 };
 
 #endif //BORD_H
