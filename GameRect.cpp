@@ -1,0 +1,29 @@
+//
+// Created by paulg on 2/12/2025.
+//
+
+#include "GameRect.h"
+#include "raylib.h"
+
+void GameRect::applyForces(int deltaX, int deltaY) {
+    dx += deltaX;
+    dy += deltaY;
+}
+
+bool GameRect::isColliding(const GameRect &other) const {
+    return x < other.x + other.width && x + width > other.x && y < other.y + other.height && y + height > other.y;
+}
+
+void GameRect::draw() {
+    DrawRectangle(x, y, width, height, color);
+}
+
+void GameRect::update() {
+    if (hasGravity && dy < 10) {
+        dy += gravity;
+    }
+
+    x += dx;
+    y += dy;
+}
+

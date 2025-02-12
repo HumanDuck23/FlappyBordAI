@@ -21,7 +21,9 @@ if (NOT ${LIB1}_FOUND)
     include_dependency(${LIB1} https://github.com/raysan5/raylib.git 5.0)
 endif()
 
-add_executable(FlappyBordAI main.cpp)
+add_executable(FlappyBordAI main.cpp
+        GameRect.h
+        GameRect.cpp)
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
 target_link_libraries(FlappyBordAI PRIVATE ${LIB1})
