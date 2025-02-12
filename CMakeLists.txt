@@ -25,7 +25,9 @@ add_executable(FlappyBordAI main.cpp
         Bord.h
         GameRect.h
         GameRect.cpp
-        Bord.cpp)
+        Bord.cpp
+        Pipe.h
+        Pipe.cpp)
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
 target_link_libraries(FlappyBordAI PRIVATE ${LIB1})
