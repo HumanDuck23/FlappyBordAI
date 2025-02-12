@@ -25,12 +25,12 @@ protected:
 
 public:
     virtual ~GameRect() = default;
-    explicit GameRect(int xPos, int yPos, int w, int h) : x(xPos), y(yPos), width(w), height(h) {}
+    explicit GameRect(float xPos, float yPos, int w, int h) : x(xPos), y(yPos), width(w), height(h) {}
 
     void applyForces(float deltaX, float deltaY);
     bool isColliding(const GameRect &other) const;
     void draw();
-    void update();
+    virtual void update();
 };
 
 #endif //GAMERECT_H
