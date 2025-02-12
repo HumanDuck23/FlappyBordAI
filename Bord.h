@@ -28,7 +28,7 @@ public:
     float getY() { return y; }
     float getHeight() { return height; }
 
-    bool isDead() { return dead; }
+    bool isDead() const { return dead; }
 };
 
 #endif //BORD_H
