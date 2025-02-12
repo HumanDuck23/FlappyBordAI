@@ -26,7 +26,7 @@ public:
 
 
     float getY() { return y; }
-    float getHeight() { return height; }
+    int getHeight() { return height; }
 
     bool isDead() const { return dead; }
 };
