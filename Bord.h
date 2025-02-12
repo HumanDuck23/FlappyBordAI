@@ -21,7 +21,7 @@ private:
     void flap();
 public:
     explicit Bord(int x, int y);
-    void die(float gapDist);
+    void die(float gapDist = 1000);
     void think(); // Thinks and flaps (or doesn't)
 
     float getY() { return y; }
