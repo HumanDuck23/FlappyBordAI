@@ -17,7 +17,7 @@ protected:
     int height = 50;
 
     bool hasGravity = true;
-    float gravity = 0.2;
+    float gravity = 0.4;
     Color color = {0, 0, 0, 255};
 
     void setColor(Color c) { color = c; }
@@ -29,7 +29,7 @@ public:
 
     void applyForces(float deltaX, float deltaY);
     bool isColliding(const GameRect &other) const;
-    virtual void draw();
+    void draw();
     void update();
 };
 
