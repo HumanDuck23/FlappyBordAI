@@ -15,6 +15,7 @@ public:
     void update() override;
 
     float getX() const { return x; }
+    float getY() const { return y; }
     int getWidth() const { return width; }
 };
 
