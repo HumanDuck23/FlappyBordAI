@@ -23,6 +23,8 @@ public:
     explicit Bord(int x, int y);
     void die(float gapDist);
     void think(); // Thinks and flaps (or doesn't)
+
+    float getY() { return y; }
 };
 
 #endif //BORD_H
