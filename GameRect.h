@@ -8,7 +8,7 @@
 #include "raylib.h"
 
 class GameRect {
-private:
+protected:
     float x = 0;
     float y = 0;
     float dx = 0;
@@ -20,7 +20,6 @@ private:
     float gravity = 0.2;
     Color color = {0, 0, 0, 255};
 
-protected:
     void setColor(Color c) { color = c; }
     Color getColor() { return color; }
 
@@ -30,7 +29,7 @@ public:
 
     void applyForces(float deltaX, float deltaY);
     bool isColliding(const GameRect &other) const;
-    void draw();
+    virtual void draw();
     void update();
 };
 
