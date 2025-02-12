@@ -24,8 +24,8 @@ protected:
     Color getColor() { return color; }
 
 public:
-    explicit GameRect(int xPos, int yPos, int w, int h) : x(xPos), y(yPos), width(w), height(h) {
-    }
+    virtual ~GameRect() = default;
+    explicit GameRect(int xPos, int yPos, int w, int h) : x(xPos), y(yPos), width(w), height(h) {}
 
     void applyForces(float deltaX, float deltaY);
     bool isColliding(const GameRect &other) const;
