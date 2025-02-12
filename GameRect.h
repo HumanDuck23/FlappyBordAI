@@ -28,7 +28,7 @@ public:
     explicit GameRect(int xPos, int yPos, int w, int h) : x(xPos), y(yPos), width(w), height(h) {
     }
 
-    void applyForces(int deltaX, int deltaY);
+    void applyForces(float deltaX, float deltaY);
     bool isColliding(const GameRect &other) const;
     void draw();
     void update();

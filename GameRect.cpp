@@ -5,7 +5,7 @@
 #include "GameRect.h"
 #include "raylib.h"
 
-void GameRect::applyForces(int deltaX, int deltaY) {
+void GameRect::applyForces(float deltaX, float deltaY) {
     dx += deltaX;
     dy += deltaY;
 }
