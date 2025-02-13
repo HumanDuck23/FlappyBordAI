@@ -31,7 +31,9 @@ add_executable(FlappyBordAI main.cpp
         Pipe.cpp
         FlappyBord.cpp
         util.h
-        util.cpp)
+        util.cpp
+        activation.h
+        activation.cpp)
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
 target_link_libraries(FlappyBordAI PRIVATE ${LIB1})
