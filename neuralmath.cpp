@@ -16,22 +16,20 @@ std::vector<float> neuralmath::multiply(std::vector<float> &inputVector,
         return result;
     }
 
-    for (int i = 0; i < inputMatrix.size(); i++) {
-        std::vector<float> &rowVector = inputMatrix.at(i);
+    if (inputVector.size() != inputMatrix.size()) {
+        std::cout << "MATRIX ERROR: Input vector and matrix dimensions don't match!" << std::endl;
+        result.clear();
+        return result;
+    }
 
-        if (rowVector.size() != inputVector.size()) {
-            std::cout << "MATRIX ERROR: Input vector and matrix dimensions don't match!" << std::endl;
-            result.clear();
-            return result;
-        }
+    int N_out = inputMatrix[0].size();
+    int N_in = inputVector.size();
 
-        float sum = 0;
-        for (int j = 0; j < rowVector.size(); j++) {
-            float x = rowVector.at(j);
-            float y = inputVector.at(j);
-            sum += x * y;
+    for (int i = 0; i < N_out; i++) { // Loop over columns (output neurons)
+        result.push_back(0);
+        for (int j = 0; j < N_in; j++) { // Loop over input features (rows)
+            result[i] += inputVector[j] * inputMatrix[j][i];
         }
-        result.push_back(sum);
     }
 
     return result;
@@ -57,9 +55,10 @@ std::vector<float> neuralmath::randomVector(int size, int min, int max) {
     std::vector<float> result;
 
     for (int i = 0; i < size; i++) {
-        result.push_back(rgen.distr(rgen.gen));
+        float a = rgen.distr(rgen.gen);
+        std::cout << a << std::endl;
+        result.push_back(a);
     }
-
     return result;
 }
 
