@@ -31,14 +31,14 @@ private:
 
     void randomizeBias();
     void randomizeWeights();
-
-    void mutateBias(float chance);
-    void mutateWeights(float chance);
 public:
     explicit Layer(int inputSize, int outputSize, float (*activation)(float arg));
     explicit Layer(std::vector<float> &bias, std::vector<std::vector<float>> &weights, float (*activation)(float arg));
 
     std::vector<float> feedForward(std::vector<float> inputVector);
+    void mutateBias(float chance);
+    void mutateWeights(float chance);
+
     Layer mutatedLayer();
 };
 
