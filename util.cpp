@@ -5,16 +5,16 @@
 #include "util.h"
 
 RandomIntGen randomIntDistr(int min, int max) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(min, max);
 
     return RandomIntGen { distr, gen };
 }
 
 RandomFloatGen randomFloatDistr(float min, float max) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
     std::uniform_real_distribution<float> distr(min, max);
 
     return RandomFloatGen { distr, gen };
