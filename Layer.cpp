@@ -39,13 +39,11 @@ Layer::Layer(std::vector<float> &bias, std::vector<std::vector<float> > &weights
 
 
 void Layer::randomizeBias() {
-    bias = neuralmath::randomVector(inputSize, MIN_BIAS, MAX_BIAS);
+    bias = neuralmath::randomVector(outputSize, MIN_BIAS, MAX_BIAS);
 }
 
 void Layer::randomizeWeights() {
-    // outputSize -> row count
-    // inputSize  -> row length (this is what needs to be the same as the input size)
-    weights = neuralmath::randomMatrix(outputSize, inputSize, MIN_WEIGHT, MAX_WEIGHT);
+    weights = neuralmath::randomMatrix(inputSize, outputSize, MIN_WEIGHT, MAX_WEIGHT);
 }
 
 void Layer::mutateBias(float chance) {
@@ -71,6 +69,8 @@ void Layer::mutateWeights(float chance) {
 }
 
 std::vector<float> Layer::feedForward(std::vector<float> inputVector) {
+    //std::cout << "Feeding forward input vector with size " << inputVector.size() << std::endl;
+    //std::cout << "Layer internals:\nInput Neurons: " << inputSize << "\nOutput Neurons: " << outputSize << "\nBiases: " << bias.size() << "\nWeight Rows: " << weights.size() << "\nWeight Columns: " << weights.at(0).size() << std::endl;
     std::vector<float> _ = neuralmath::multiply(inputVector, weights);
     std::vector<float> result = neuralmath::add(_, bias);
 
