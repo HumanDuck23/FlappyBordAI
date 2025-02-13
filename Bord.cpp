@@ -44,3 +44,12 @@ void Bord::think() {
         flap();
     }
 }
+
+float Bord::fitness() {
+    long long timeAlive = diedAt - spawnedAt;
+    float yDistance = std::max(distanceToPipeGap, 0.01f);
+
+    float distanceReward = 1.0f - std::exp(-yDistance);
+    return static_cast<float>(timeAlive) + distanceReward;
+}
+

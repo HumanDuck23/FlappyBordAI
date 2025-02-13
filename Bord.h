@@ -23,6 +23,7 @@ public:
     explicit Bord(int x, int y);
     void die(float gapDist = 1000);
     void think(); // Thinks and flaps (or doesn't)
+    float fitness();
 
 
     float getY() { return y; }
