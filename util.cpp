@@ -15,7 +15,7 @@ RandomIntGen randomIntDistr(int min, int max) {
 RandomFloatGen randomFloatDistr(float min, float max) {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> distr(min, max);
+    std::uniform_real_distribution<float> distr(min, max);
 
     return RandomFloatGen { distr, gen };
 }

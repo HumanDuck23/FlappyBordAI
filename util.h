@@ -13,7 +13,7 @@ typedef struct {
 } RandomIntGen;
 
 typedef struct {
-    std::uniform_real_distribution<> distr;
+    std::uniform_real_distribution<float> distr;
     std::mt19937 gen;
 } RandomFloatGen;
 
