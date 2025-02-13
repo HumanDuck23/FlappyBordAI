@@ -18,6 +18,9 @@ Network::Network(std::vector<int> shape, const std::vector<float(*)(float)> &act
         int outputSize = shape[i + 1];
 
         Layer l(inputSize, outputSize, activations[i]);
+        l.randomizeBias();
+        l.randomizeWeights();
+        layers.push_back(l);
     }
 
     finalActivation = activations.back();
