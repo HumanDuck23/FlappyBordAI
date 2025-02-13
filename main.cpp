@@ -15,7 +15,7 @@ int main() {
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
-        // Updat
+        // Update
         fb.update();
 
         // Draw
