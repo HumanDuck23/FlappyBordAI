@@ -37,7 +37,9 @@ add_executable(FlappyBordAI main.cpp
         neuralmath.h
         neuralmath.cpp
         Layer.h
-        Layer.cpp)
+        Layer.cpp
+        Network.h
+        Network.cpp)
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
 target_link_libraries(FlappyBordAI PRIVATE ${LIB1})
