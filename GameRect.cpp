@@ -18,7 +18,7 @@ void GameRect::draw() {
 }
 
 void GameRect::update() {
-    if (hasGravity && dy < 10) {
+    if (hasGravity && dy < 20) {
         dy += gravity;
     }
 

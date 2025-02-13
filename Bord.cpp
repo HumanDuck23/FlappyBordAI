@@ -3,6 +3,7 @@
 //
 #include "Bord.h"
 #include "raylib.h"
+#include "util.h"
 
 #include <random>
 #include <chrono>
@@ -13,13 +14,11 @@ long long unixTimestamp() {
 }
 
 Bord::Bord(int x, int y) : GameRect(x, y, 50, 50) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distr(0, 255);
+    RandomIntGen rgen = randomIntDistr(0, 255);
 
-    unsigned char r = distr(gen);
-    unsigned char g = distr(gen);
-    unsigned char b = distr(gen);
+    unsigned char r = rgen.distr(rgen.gen);
+    unsigned char g = rgen.distr(rgen.gen);
+    unsigned char b = rgen.distr(rgen.gen);
 
     Color bordColor = { r, g, b, 255 };
     setColor(bordColor);
@@ -41,4 +40,7 @@ void Bord::die(float gapDist) {
 
 void Bord::think() {
     // AI logic
+    if (IsKeyPressed(KEY_SPACE)) {
+        flap();
+    }
 }
