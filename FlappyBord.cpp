@@ -3,12 +3,12 @@
 //
 
 #include "FlappyBord.h"
-
-#include <format>
-#include <iostream>
-
 #include "raylib.h"
 #include "util.h"
+
+#include <algorithm>
+#include <format>
+#include <iostream>
 
 FlappyBord::FlappyBord(int bordCount) {
     screenWidth = GetScreenWidth();
@@ -66,7 +66,7 @@ void FlappyBord::update() {
 
         if (!b.isDead()) {
             b.update();
-            b.think();
+            b.think(pipes);
         }
     }
 
@@ -105,12 +105,29 @@ void FlappyBord::draw() {
 }
 
 void FlappyBord::evolve() {
-    // TODO - actually implement this
+    std::sort(bords.begin(), bords.end(), [](const Bord &a, const Bord &b) {
+        return a.fitness() > b.fitness();
+    });
+
     int bordCount = bords.size();
+    int numSelected = static_cast<int>(static_cast<float>(bords.size()) * 0.2f); // 20% selection
+    std::vector top_bords(bords.begin(), bords.begin() + numSelected);
+
     bords.clear();
-    int yPos = screenHeight / 3 * 2;
-    for (int i = 0; i < bordCount; i++) {
-        Bord b(0, yPos);
-        bords.push_back(b);
+
+    while (bords.size() < bordCount) {
+        Bord parent = top_bords[bords.size() % numSelected]; // Cycle through parents
+        Bord offspring = parent; // Copy parent
+
+        offspring.setY(screenHeight / 3 * 2);
+
+        // Mutate weights and biases
+        offspring.mutateBrain();
+
+        bords.push_back(offspring);
     }
+
+    generation++;
+    score = 0;
+    pipes.clear();
 }
