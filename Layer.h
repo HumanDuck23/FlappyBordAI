@@ -29,13 +29,13 @@ private:
     RandomFloatGen rgen;
     RandomFloatGen mutgen;
 
-    void randomizeBias();
-    void randomizeWeights();
 public:
     explicit Layer(int inputSize, int outputSize, float (*activation)(float arg));
     explicit Layer(std::vector<float> &bias, std::vector<std::vector<float>> &weights, float (*activation)(float arg));
 
     std::vector<float> feedForward(std::vector<float> inputVector);
+    void randomizeBias();
+    void randomizeWeights();
     void mutateBias(float chance);
     void mutateWeights(float chance);
 
