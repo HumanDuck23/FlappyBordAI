@@ -39,6 +39,8 @@ add_executable(FlappyBordAI main.cpp
         src/neuralnet/Network.cpp
         src/neuralnet/network_tests.h
         src/neuralnet/network_tests.cpp
+        src/game/GameRect.h
+        src/game/GameRect.cpp
 )
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
