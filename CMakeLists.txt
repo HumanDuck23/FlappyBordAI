@@ -35,6 +35,10 @@ add_executable(FlappyBordAI main.cpp
         src/neuralnet/Layer.cpp
         src/neuralnet/layer_tests.h
         src/neuralnet/layer_tests.cpp
+        src/neuralnet/Network.h
+        src/neuralnet/Network.cpp
+        src/neuralnet/network_tests.h
+        src/neuralnet/network_tests.cpp
 )
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
