@@ -30,6 +30,7 @@ add_executable(FlappyBordAI main.cpp
         src/math/activation.h
         src/math/activation_tests.cpp
         src/math/activation_tests.h
+        src/math/randomutil.h
 )
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
