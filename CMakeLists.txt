@@ -23,13 +23,13 @@ endif()
 
 add_executable(FlappyBordAI main.cpp
         main.cpp
-        math/neuralmath.h
-        math/neuralmath.cpp
-        math/neuralmath_tests.cpp
-        math/neuralmath_tests.h
-        math/activation.h
-        math/activation_tests.cpp
-        math/activation_tests.h
+        src/math/neuralmath.h
+        src/math/neuralmath.cpp
+        src/math/neuralmath_tests.cpp
+        src/math/neuralmath_tests.h
+        src/math/activation.h
+        src/math/activation_tests.cpp
+        src/math/activation_tests.h
 )
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
