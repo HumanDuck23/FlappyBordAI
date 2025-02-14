@@ -22,7 +22,11 @@ if (NOT ${LIB1}_FOUND)
 endif()
 
 add_executable(FlappyBordAI main.cpp
-        main.cpp)
+        main.cpp
+        math/neuralmath.h
+        math/neuralmath.cpp
+        math/neuralmath_tests.cpp
+        math/neuralmath_tests.h)
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
 target_link_libraries(FlappyBordAI PRIVATE ${LIB1})
