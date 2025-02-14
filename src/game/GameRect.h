@@ -23,6 +23,11 @@ public:
 
     void applyForces(float deltaX, float deltaY);
     bool isColliding(const GameRect &other) const;
+
+    float getX() const { return x; }
+    float getY() const { return y; }
+    float getWidth() const { return width; }
+    float getHeight() const { return height; }
 };
 
 #endif //GAMERECT_H
