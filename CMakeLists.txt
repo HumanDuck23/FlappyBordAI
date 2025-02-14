@@ -45,6 +45,8 @@ add_executable(FlappyBordAI main.cpp
         src/game/Pipe.cpp
         src/game/Bord.h
         src/game/Bord.cpp
+        src/game/FlappyBord.h
+        src/game/FlappyBord.cpp
 )
 
 target_include_directories(FlappyBordAI PRIVATE ${raylib_INCLUDE_DIRS})
