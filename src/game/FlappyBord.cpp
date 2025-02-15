@@ -104,19 +104,19 @@ void FlappyBord::update() {
             bord.update();
             bord.think(pipes[closestPipeIndex ^ 1]); // we want the lower pipe here
         }
+    }
 
-        for (auto &pipe : pipes) {
-            pipe.update(); // No need for index fuckery as the amount of pipes stays the same
-        }
+    for (auto &pipe : pipes) {
+        pipe.update(); // No need for index fuckery as the amount of pipes stays the same
+    }
 
-        bool allDead = true;
-        for (auto &b : bords) {
-            if (!b.isDead()) allDead = false;
-        }
+    bool allDead = true;
+    for (auto &b : bords) {
+        if (!b.isDead()) allDead = false;
+    }
 
-        if (allDead) {
-            evolve();
-        }
+    if (allDead) {
+        evolve();
     }
 }
 
