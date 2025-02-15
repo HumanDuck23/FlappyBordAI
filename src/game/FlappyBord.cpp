@@ -49,6 +49,7 @@ void FlappyBord::setPipes() {
             pipes.emplace_back(pipeX, static_cast<float>(screenHeight - pipe2Height), pipeWidth, pipe2Height);
         }
     }
+    closestPipeIndex = 0;
 }
 
 
