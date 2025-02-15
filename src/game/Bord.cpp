@@ -67,6 +67,8 @@ void Bord::mutateBrain() {
 void Bord::reset() {
     x = initialX;
     y = initialY;
+    dx = 0;
+    dy = 0;
 
     distanceToPipeGap = 1000;
 
