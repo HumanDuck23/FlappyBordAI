@@ -102,7 +102,7 @@ void FlappyBord::update() {
             bord.die(); // No distance to gap results in 1000 -> high penalty for ceiling / floor death
         } else {
             bord.update();
-            bord.think(pipes[closestPipeIndex]);
+            bord.think(pipes[closestPipeIndex ^ 1]); // we want the lower pipe here
         }
 
         for (auto &pipe : pipes) {
