@@ -6,7 +6,7 @@ Pipe::Pipe(const float x, const float y, const float width, const float height) 
 }
 
 void Pipe::update() {
-    x -= 1.0f;
+    x -= 4.0f;
     if (x + getWidth() < 0) {
         outOfScreen = true;
     } else {
