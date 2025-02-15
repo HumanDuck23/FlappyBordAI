@@ -22,17 +22,35 @@ FlappyBord::FlappyBord(const int bordCount) {
     }
 
     // Calculate amount of pipe pairs
-    int numPipes = static_cast<int>((static_cast<float>(screenWidth) + pipeSpacing) / (pipeWidth + pipeSpacing));
+    const int numPipes = static_cast<int>((static_cast<float>(screenWidth) + pipeSpacing) / (pipeWidth + pipeSpacing));
+    pipes.reserve(numPipes * 2);
+    setPipes();
+}
 
+void FlappyBord::setPipes() {
+    int numPipes = static_cast<int>((static_cast<float>(screenWidth) + pipeSpacing) / (pipeWidth + pipeSpacing));
     for (int i = 0; i < numPipes; i++) {
         const int pipeX = screenWidth + i * static_cast<int>(pipeWidth + pipeSpacing);
         const int pipe1Height = pipeGen->next();
         const int pipe2Height = screenHeight - static_cast<int>(pipeGap) - pipe1Height;
 
-        pipes.emplace_back(pipeX, 0, pipeWidth, pipe1Height);
-        pipes.emplace_back(pipeX, static_cast<float>(screenHeight - pipe2Height), pipeWidth, pipe2Height);
+        if (i * 2 < pipes.size()) {
+            // Modify existing pipes
+            pipes[i * 2].setX(static_cast<float>(pipeX));
+            pipes[i * 2].setY(0);
+            pipes[i * 2].setHeight(static_cast<float>(pipe1Height));
+
+            pipes[i * 2 + 1].setX(static_cast<float>(pipeX));
+            pipes[i * 2 + 1].setY(static_cast<float>(screenHeight - pipe2Height));
+            pipes[i * 2 + 1].setHeight(static_cast<float>(pipe2Height));
+        } else {
+            // Or add new pipes if they don’t already exist
+            pipes.emplace_back(pipeX, 0, pipeWidth, pipe1Height);
+            pipes.emplace_back(pipeX, static_cast<float>(screenHeight - pipe2Height), pipeWidth, pipe2Height);
+        }
     }
 }
+
 
 void FlappyBord::update() {
     if (pipes.size() < 2) {
@@ -132,4 +150,8 @@ void FlappyBord::evolve() {
             bords[i].reset();
         }
     }
+
+    generation++;
+    score = 0;
+    setPipes();
 }

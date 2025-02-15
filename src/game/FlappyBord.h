@@ -24,6 +24,7 @@ private:
     int generation = 0;
     int score = 0;
 
+    void setPipes();
     void evolve();
 public:
     explicit FlappyBord(int bordCount);
