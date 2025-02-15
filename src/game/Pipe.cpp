@@ -9,6 +9,8 @@ void Pipe::update() {
     x -= 1.0f;
     if (x + getWidth() < 0) {
         outOfScreen = true;
+    } else {
+        outOfScreen = false;
     }
 }
 
