@@ -65,7 +65,13 @@ void FlappyBord::update() {
         score += 1;
 
         // Don't need to check pipe2 as they share the same X coord and update the same
-        const float newX = static_cast<float>(screenWidth) + pipeSpacing;
+        float maxX = 0;
+        for (const Pipe &pipe : pipes) {
+            maxX = std::max(maxX, pipe.getX());
+        }
+
+        // Move the pipe pair to the correct new position, exactly after the last pipe
+        const float newX = maxX + pipeWidth + pipeSpacing;
         pipe1.setX(newX);
         pipe2.setX(newX);
 
