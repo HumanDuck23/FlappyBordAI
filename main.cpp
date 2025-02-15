@@ -9,7 +9,7 @@ int main() {
 
     InitWindow(screenWidth, screenHeight, "FlappyBord AI");
 
-    FlappyBord fb(10);
+    FlappyBord fb(200);
 
     SetTargetFPS(60);
 
