@@ -18,6 +18,8 @@ private:
 
     float pipeSpacing = 400;
     float pipeGap = 150;
+    float pipeWidth = 50;
+    int closestPipeIndex = 0;
 
     int generation = 0;
     int score = 0;
