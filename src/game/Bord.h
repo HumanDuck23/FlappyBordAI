@@ -26,7 +26,7 @@ public:
     explicit Bord(float x, float y);
 
     void die(float gapDistance = 1000);
-    void think(std::vector<Pipe> &pipes);
+    void think(const Pipe &pipe);
     float fitness() const;
 
     bool isDead() const { return dead; };

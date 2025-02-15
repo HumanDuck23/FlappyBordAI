@@ -40,11 +40,8 @@ void Bord::die(const float gapDistance) {
     distanceToPipeGap = gapDistance;
 }
 
-void Bord::think(std::vector<Pipe> &pipes) {
-    if (pipes.empty()) return;
-
-    const auto &pipe = pipes[1];
-    std::vector inputVector = { y, pipe.getX(), pipe.getY() };
+void Bord::think(const Pipe &pipe) {
+    const std::vector inputVector = { y, pipe.getX(), pipe.getY() };
 
     const std::vector result = brain.feedForward(inputVector);
     if (result.empty()) {
