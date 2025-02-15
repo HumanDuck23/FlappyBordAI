@@ -1,9 +1,9 @@
 #include "Bord.h"
 
-#include <chrono>
-
 #include "../math/activation.h"
 #include "../math/randomutil.h"
+
+#include <chrono>
 
 long long unixTimestamp() {
     using namespace std::chrono;
@@ -12,7 +12,7 @@ long long unixTimestamp() {
 
 Bord::Bord(const float x, const float y) :
     GameRect(x, y, 50, 50),
-    brain(Network(std::vector{ 3, 5, 5, 1 }, std::vector{ activation::relu, activation::tanh, activation::relu, activation::sigmoid })) {
+    brain(Network(std::vector{ 3, 5, 5, 1 }, std::vector{ activation::relu, activation::relu, activation::sigmoid })) {
     initialX = x;
     initialY = y;
 
