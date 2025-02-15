@@ -4,6 +4,13 @@
 #include "GameRect.h"
 #include "Pipe.h"
 #include "../neuralnet/Network.h"
+#include "../math/randomutil.h"
+
+#include <optional>
+
+namespace randomutil {
+    class RandomIntGen;
+}
 
 long long unixTimestamp();
 
@@ -20,8 +27,10 @@ private:
 
     Network brain;
 
-    void flap();
+    std::optional<randomutil::RandomIntGen> colorGen;
 
+    void flap();
+    void randomizeColor();
 public:
     explicit Bord(float x, float y);
 

@@ -16,15 +16,8 @@ Bord::Bord(const float x, const float y) :
     initialX = x;
     initialY = y;
 
-    randomutil::RandomIntGen colorGen(0, 255);
-
-    const unsigned char r = colorGen.next();
-    const unsigned char g = colorGen.next();
-    const unsigned char b = colorGen.next();
-
-    const Color bordColor = { r, g, b, 255 };
-
-    setColor(bordColor);
+    colorGen.emplace(0, 255);
+    randomizeColor();
 
     spawnedAt = unixTimestamp();
 }
@@ -33,6 +26,19 @@ void Bord::flap() {
     dy = 0;
     applyForces(0, -7);
 }
+
+void Bord::randomizeColor() {
+    if (colorGen.has_value()) {
+        const unsigned char r = colorGen.value().next();
+        const unsigned char g = colorGen.value().next();
+        const unsigned char b = colorGen.value().next();
+
+        const Color bordColor = { r, g, b, 255 };
+
+        setColor(bordColor);
+    }
+}
+
 
 void Bord::die(const float gapDistance) {
     dead = true;
@@ -74,6 +80,8 @@ void Bord::reset() {
 
     diedAt = -1;
     spawnedAt = unixTimestamp();
+
+    randomizeColor();
 
     dead = false;
 }
