@@ -10,7 +10,7 @@ protected:
     float width = 50, height = 50;
 
     bool hasGravity = true;
-    float gravity = 0.4f;
+    float gravity = 0.2f;
     Color color = { 0, 0, 0, 255 };
 
     void setColor(const Color color) { this->color = color; }
