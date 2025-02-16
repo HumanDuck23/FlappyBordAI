@@ -7,7 +7,7 @@
 #include <format>
 #include <fstream>
 
-FlappyBord::FlappyBord(const int bordCount) {
+FlappyBord::FlappyBord(const int bordCount, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath) : logPath(logPath) {
     screenWidth = GetScreenWidth();
     screenHeight = GetScreenHeight();
 
@@ -19,7 +19,7 @@ FlappyBord::FlappyBord(const int bordCount) {
 
     int yPos = screenHeight / 3 * 2;
     for (int i = 0; i < bordCount; i++) {
-        bords.emplace_back(0.0, yPos);
+        bords.emplace_back(0.0, yPos, brainShape, mutationRate, mutationChance);
     }
 
     // Calculate amount of pipe pairs

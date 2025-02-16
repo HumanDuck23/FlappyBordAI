@@ -23,12 +23,12 @@ private:
 
     int generation = 0;
     int score = 0;
-    std::string logPath = "score_log.txt";
+    std::string logPath;
 
     void setPipes();
     void evolve();
 public:
-    explicit FlappyBord(int bordCount);
+    explicit FlappyBord(int bordCount, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath);
 
     void update();
     void draw() const;

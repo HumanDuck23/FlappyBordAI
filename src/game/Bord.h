@@ -26,13 +26,15 @@ private:
     float initialX = 0, initialY = 0;
 
     Network brain;
+    float mutationRate;
+    float mutationChance;
 
     std::optional<randomutil::RandomIntGen> colorGen;
 
     void flap();
     void randomizeColor();
 public:
-    explicit Bord(float x, float y);
+    explicit Bord(float x, float y, const std::vector<int>& brainShape, float mutationRate, float mutationChance);
 
     void die(float gapDistance = 1000);
     void think(const Pipe &pipe);

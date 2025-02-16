@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.28)
 project(FlappyBordAI)
 
 set(CMAKE_CXX_STANDARD 20)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 include(FetchContent)
 
@@ -22,7 +24,6 @@ if (NOT ${LIB1}_FOUND)
 endif()
 
 add_executable(FlappyBordAI main.cpp
-        main.cpp
         src/math/neuralmath.h
         src/math/neuralmath.cpp
         src/math/neuralmath_tests.cpp

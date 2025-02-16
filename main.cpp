@@ -4,13 +4,30 @@
 #include "raylib.h"
 #include "src/game/FlappyBord.h"
 
-int main() {
+int main(int argc, char *argv[]) {
+    if (argc < 5) {
+        std::cerr << "Usage: " << argv[0] << " <brainShape> <logFile> <mutationRate> <mutationChance>" << std::endl;
+        return 1;
+    }
+
+    std::string brainShapeStr = argv[1];
+    std::string logFile = argv[2];
+    float mutationRate = std::stof(argv[3]);
+    float mutationChance = std::stof(argv[4]);
+
+    std::vector<int> brainShape;
+    std::stringstream ss(brainShapeStr);
+    std::string segment;
+    while (std::getline(ss, segment, ',')) {
+        brainShape.push_back(std::stoi(segment));
+    }
+
     constexpr int screenWidth = 1600;
     constexpr int screenHeight = 1200;
 
     InitWindow(screenWidth, screenHeight, "FlappyBord AI");
 
-    FlappyBord fb(200);
+    FlappyBord fb(200, brainShape, mutationRate, mutationChance, logFile);
 
     constexpr int targetFPS = 60;
     constexpr int tickInterval = 1000 / targetFPS;
