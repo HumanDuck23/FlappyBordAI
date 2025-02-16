@@ -23,6 +23,7 @@ private:
 
     int generation = 0;
     int score = 0;
+    std::string logPath = "score_log.txt";
 
     void setPipes();
     void evolve();

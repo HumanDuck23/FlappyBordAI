@@ -5,6 +5,7 @@
 #include "raylib.h"
 
 #include <format>
+#include <fstream>
 
 FlappyBord::FlappyBord(const int bordCount) {
     screenWidth = GetScreenWidth();
@@ -25,6 +26,11 @@ FlappyBord::FlappyBord(const int bordCount) {
     const int numPipes = static_cast<int>((static_cast<float>(screenWidth) + pipeSpacing) / (pipeWidth + pipeSpacing));
     pipes.reserve(numPipes * 2);
     setPipes();
+
+    // Clear log file
+    std::ofstream logFile;
+    logFile.open(logPath, std::ofstream::out | std::ofstream::trunc);
+    logFile.close();
 }
 
 void FlappyBord::setPipes() {
@@ -146,6 +152,13 @@ void FlappyBord::evolve() {
     });
 
     const size_t numSurvivors = bords.size() / 4; // Keep 25% best bords
+
+    std::ofstream logFile(logPath, std::ios::app);
+    if (logFile.is_open()) {
+        logFile << "Gen" << generation << ": " << score << "\n";
+        logFile.close();
+    }
+
 
     for (size_t i = 0; i < bords.size(); i++) {
         if (i < numSurvivors) {
