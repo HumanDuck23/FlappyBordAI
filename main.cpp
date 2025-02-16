@@ -1,4 +1,5 @@
 #include <chrono>
+#include <iostream>
 
 #include "raylib.h"
 #include "src/game/FlappyBord.h"
@@ -11,11 +12,14 @@ int main() {
 
     FlappyBord fb(200);
 
-    SetTargetFPS(60);
+    constexpr int targetFPS = 60;
+    constexpr int tickInterval = 1000 / targetFPS;
+
+    SetTargetFPS(targetFPS);
 
     auto time_current = std::chrono::steady_clock::now();
     auto time_last = time_current;
-    auto const update_interval = std::chrono::milliseconds{16};
+    auto const update_interval = std::chrono::milliseconds{tickInterval};
 
     while (!WindowShouldClose()) {
         time_current = std::chrono::steady_clock::now();
