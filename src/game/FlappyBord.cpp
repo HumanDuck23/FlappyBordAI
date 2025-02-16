@@ -10,7 +10,7 @@ FlappyBord::FlappyBord(const int bordCount) {
     screenWidth = GetScreenWidth();
     screenHeight = GetScreenHeight();
 
-    int lowerHeightBound = 50;
+    int lowerHeightBound = static_cast<int>(pipeGap);
     int upperHeightBound = screenHeight - static_cast<int>(pipeGap) - lowerHeightBound;
     pipeGen.emplace(lowerHeightBound, upperHeightBound);
 

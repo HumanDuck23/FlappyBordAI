@@ -16,9 +16,9 @@ private:
 
     int screenWidth, screenHeight;
 
-    float pipeSpacing = 400;
-    float pipeGap = 150;
-    float pipeWidth = 50;
+    float pipeSpacing = 500;
+    float pipeGap = 200;
+    float pipeWidth = 80;
     int closestPipeIndex = 0;
 
     int generation = 0;
