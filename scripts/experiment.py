@@ -16,11 +16,12 @@ with open(config_path, "r") as f:
 
 brain_shape = config["brainShape"]
 log_file = config["logFile"]
+fps = config["fps"]
 mutation_rate = config["mutationRate"]
 mutation_chance = config["mutationChance"]
 
 # Run FlappyBord
-command = [exe_path, brain_shape, log_file, mutation_rate, mutation_chance]
+command = [exe_path, brain_shape, log_file, fps, mutation_rate, mutation_chance]
 print(f"Starting C++ program: {' '.join(command)}")
 
 cpp_process = subprocess.Popen(

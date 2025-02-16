@@ -5,15 +5,16 @@
 #include "src/game/FlappyBord.h"
 
 int main(int argc, char *argv[]) {
-    if (argc < 5) {
-        std::cerr << "Usage: " << argv[0] << " <brainShape> <logFile> <mutationRate> <mutationChance>" << std::endl;
+    if (argc < 6) {
+        std::cerr << "Usage: " << argv[0] << " <brainShape> <logFile> <framerate> <mutationRate> <mutationChance>" << std::endl;
         return 1;
     }
 
     std::string brainShapeStr = argv[1];
     std::string logFile = argv[2];
-    float mutationRate = std::stof(argv[3]);
-    float mutationChance = std::stof(argv[4]);
+    int framerate = std::stoi(argv[3]);
+    float mutationRate = std::stof(argv[4]);
+    float mutationChance = std::stof(argv[5]);
 
     std::vector<int> brainShape;
     std::stringstream ss(brainShapeStr);
@@ -29,10 +30,9 @@ int main(int argc, char *argv[]) {
 
     FlappyBord fb(200, brainShape, mutationRate, mutationChance, logFile);
 
-    constexpr int targetFPS = 60;
-    constexpr int tickInterval = 1000 / targetFPS;
+    int tickInterval = 1000 / framerate;
 
-    SetTargetFPS(targetFPS);
+    SetTargetFPS(framerate);
 
     auto time_current = std::chrono::steady_clock::now();
     auto time_last = time_current;
