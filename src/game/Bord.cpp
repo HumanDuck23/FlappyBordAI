@@ -55,7 +55,7 @@ void Bord::think(const Pipe &pipe) {
     if (result.empty()) {
         throw std::runtime_error("Bord::think: Neural net returned empty vector.");
     }
-    if (result[0] > 0.8f) {
+    if (result[0] > 0.85f) {
         flap();
     }
 }
