@@ -7,6 +7,8 @@
 #include <format>
 #include <fstream>
 
+#include "../math/activation.h"
+
 FlappyBord::FlappyBord(const int bordCount, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath) : logPath(logPath) {
     screenWidth = GetScreenWidth();
     screenHeight = GetScreenHeight();
@@ -17,9 +19,16 @@ FlappyBord::FlappyBord(const int bordCount, std::vector<int> &brainShape, float 
 
     bords.reserve(bordCount);
 
+    std::vector<float(*)(float)> activations(brainShape.size() - 1);
+
+    for (int i = 0; i < brainShape.size() - 2; i++) {
+        activations[i] = activation::relu;
+    }
+    activations[brainShape.size() - 2] = activation::sigmoid;
+
     int yPos = screenHeight / 3 * 2;
     for (int i = 0; i < bordCount; i++) {
-        bords.emplace_back(0.0, yPos, brainShape, mutationRate, mutationChance);
+        bords.emplace_back(0.0, yPos, brainShape, activations, mutationRate, mutationChance);
     }
 
     // Calculate amount of pipe pairs

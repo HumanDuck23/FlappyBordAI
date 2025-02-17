@@ -10,9 +10,9 @@ long long unixTimestamp() {
     return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 }
 
-Bord::Bord(const float x, const float y, const std::vector<int> &brainShape, const float mutationRate, const float mutationChance) :
+Bord::Bord(const float x, const float y, const std::vector<int> &brainShape, const std::vector<float(*)(float)> &activations, const float mutationRate, const float mutationChance) :
     GameRect(x, y, 50, 50),
-    brain(Network(brainShape, std::vector{ activation::relu, activation::relu, activation::sigmoid })),
+    brain(Network(brainShape, activations)),
     mutationRate(mutationRate),
     mutationChance(mutationChance),
     initialX(x),
