@@ -4,3 +4,5 @@ networkBin=best_bord.bin
 framerate=60
 mutationRate=0.2
 mutationChance=0.2
+bordCount=200
+percentToEvolve=5

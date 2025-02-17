@@ -10,6 +10,8 @@ std::string brainShapeStr = "4,5,5,1";
 std::string logFile = "default_log.txt";
 std::string networkBinPath = "best_bord.bin";
 int framerate = 60;
+int percentToEvolve = 5;
+int bordCount = 200;
 float mutationRate = 0.2f;
 float mutationChance = 0.2f;
 bool headless = false;
@@ -43,6 +45,12 @@ void parseArguments(const int argc, char *argv[]) {
     if (args.contains("--networkBin")) {
         networkBinPath = args["--networkBin"];
     }
+    if (args.contains("--bordCount")) {
+        bordCount = std::stoi(args["--bordCount"]);
+    }
+    if (args.contains("--percentToEvolve")) {
+        percentToEvolve = std::stoi(args["--percentToEvolve"]);
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -60,7 +68,7 @@ int main(int argc, char *argv[]) {
 
     if (!headless) InitWindow(screenWidth, screenHeight, "FlappyBord AI");
 
-    FlappyBord fb(200, screenWidth, screenHeight, brainShape, mutationRate, mutationChance, logFile, networkBinPath);
+    FlappyBord fb(bordCount, screenWidth, screenHeight, brainShape, mutationRate, mutationChance, percentToEvolve, logFile, networkBinPath);
 
     int tickInterval = 1000 / framerate;
 

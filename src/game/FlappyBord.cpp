@@ -11,7 +11,7 @@
 
 #include "../math/activation.h"
 
-FlappyBord::FlappyBord(const int bordCount, const int screenWidth, const int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath, const std::string &networkBinPath) : logPath(logPath), networkBinPath(networkBinPath), screenWidth(screenWidth), screenHeight(screenHeight) {
+FlappyBord::FlappyBord(const int bordCount, const int screenWidth, const int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, int percentToEvolve, const std::string &logPath, const std::string &networkBinPath) : logPath(logPath), networkBinPath(networkBinPath), screenWidth(screenWidth), screenHeight(screenHeight), percentToEvolve(percentToEvolve) {
     int lowerHeightBound = static_cast<int>(pipeGap);
     int upperHeightBound = screenHeight - static_cast<int>(pipeGap) - lowerHeightBound;
     pipeGen.emplace(lowerHeightBound, upperHeightBound);
@@ -176,7 +176,9 @@ void FlappyBord::evolve() {
         bord.writeBrain(networkBinPath);
     }
 
-    const size_t numSurvivors = bords.size() / 4; // Keep 25% best bords
+    std::cout << "Evolving " << percentToEvolve << "% of birds." << std::endl;
+    const float percentFactor = static_cast<float>(percentToEvolve) / 100;
+    const size_t numSurvivors = bords.size() * percentFactor; // Keep X% best bords
 
     std::ofstream logFile(logPath, std::ios::app);
     if (logFile.is_open()) {
