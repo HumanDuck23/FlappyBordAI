@@ -1,20 +1,43 @@
 #include <chrono>
 #include <iostream>
+#include <unordered_map>
 
 #include "raylib.h"
 #include "src/game/FlappyBord.h"
 
-int main(int argc, char *argv[]) {
-    if (argc < 6) {
-        std::cerr << "Usage: " << argv[0] << " <brainShape> <logFile> <framerate> <mutationRate> <mutationChance>" << std::endl;
-        return 1;
+std::string brainShapeStr = "3,5,5,1";
+std::string logFile = "default_log.txt";
+int framerate = 60;
+float mutationRate = 0.2f;
+float mutationChance = 0.2f;
+
+void parseArguments(const int argc, char *argv[]) {
+    std::unordered_map<std::string, std::string> args;
+    for (int i = 1; i < argc - 1; i += 2) {
+        std::string key = argv[i];
+        std::string value = argv[i + 1];
+        args[key] = value;
     }
 
-    std::string brainShapeStr = argv[1];
-    std::string logFile = argv[2];
-    int framerate = std::stoi(argv[3]);
-    float mutationRate = std::stof(argv[4]);
-    float mutationChance = std::stof(argv[5]);
+    if (args.contains("--brainShape")) {
+        brainShapeStr = args["--brainShape"];
+    }
+    if (args.contains("--logFile")) {
+        logFile = args["--logFile"];
+    }
+    if (args.contains("--framerate")) {
+        framerate = std::stoi(args["--framerate"]);
+    }
+    if (args.contains("--mutationRate")) {
+        mutationRate = std::stof(args["--mutationRate"]);
+    }
+    if (args.contains("--mutationChance")) {
+        mutationChance = std::stof(args["--mutationChance"]);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    parseArguments(argc, argv);
 
     std::vector<int> brainShape;
     std::stringstream ss(brainShapeStr);

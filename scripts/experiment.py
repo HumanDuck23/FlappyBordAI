@@ -14,14 +14,17 @@ with open(config_path, "r") as f:
         key, value = line.strip().split("=")
         config[key] = value
 
-brain_shape = config["brainShape"]
-log_file = config["logFile"]
-fps = config["fps"]
-mutation_rate = config["mutationRate"]
-mutation_chance = config["mutationChance"]
+# Build command with named arguments
+command = [exe_path]
 
-# Run FlappyBord
-command = [exe_path, brain_shape, log_file, fps, mutation_rate, mutation_chance]
+for key, value in config.items():
+    command.append(f"--{key}")
+    command.append(value)
+
+if "logFile" not in config:
+    print("ERROR: logFile not specified in config! This field is required for data visualization!")
+    sys.exit(1)
+
 print(f"Starting C++ program: {' '.join(command)}")
 
 cpp_process = subprocess.Popen(
@@ -33,7 +36,7 @@ cpp_process = subprocess.Popen(
 )
 
 # Start monitoring
-visualize_process = subprocess.Popen(["python", "visualize.py", log_file])
+visualize_process = subprocess.Popen(["python", "visualize.py", config["logFile"]])
 
 # Read C++ output and print it
 while True:

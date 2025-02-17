@@ -1,5 +1,5 @@
 brainShape=3,5,5,1
 logFile=exp1.txt
-fps=60
+framerate=60
 mutationRate=0.2
 mutationChance=0.2
