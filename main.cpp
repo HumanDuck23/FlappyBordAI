@@ -8,6 +8,7 @@
 
 std::string brainShapeStr = "3,5,5,1";
 std::string logFile = "default_log.txt";
+std::string networkBinPath = "best_bord.bin";
 int framerate = 60;
 float mutationRate = 0.2f;
 float mutationChance = 0.2f;
@@ -39,6 +40,9 @@ void parseArguments(const int argc, char *argv[]) {
     if (args.contains("--headless")) {
         headless = args["--headless"] == "true";
     }
+    if (args.contains("--networkBin")) {
+        networkBinPath = args["--networkBin"];
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -56,7 +60,7 @@ int main(int argc, char *argv[]) {
 
     if (!headless) InitWindow(screenWidth, screenHeight, "FlappyBord AI");
 
-    FlappyBord fb(200, screenWidth, screenHeight, brainShape, mutationRate, mutationChance, logFile);
+    FlappyBord fb(200, screenWidth, screenHeight, brainShape, mutationRate, mutationChance, logFile, networkBinPath);
 
     int tickInterval = 1000 / framerate;
 

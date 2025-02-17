@@ -1,5 +1,6 @@
 brainShape=3,5,5,1
 logFile=exp1.txt
+networkBin=best_bord.bin
 framerate=60
 mutationRate=0.2
 mutationChance=0.2

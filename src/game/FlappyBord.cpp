@@ -1,15 +1,17 @@
 #include "FlappyBord.h"
 
 #include <algorithm>
+#include <filesystem>
 
 #include "raylib.h"
 
 #include <format>
 #include <fstream>
+#include <iostream>
 
 #include "../math/activation.h"
 
-FlappyBord::FlappyBord(const int bordCount, const int screenWidth, const int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath) : logPath(logPath), screenWidth(screenWidth), screenHeight(screenHeight) {
+FlappyBord::FlappyBord(const int bordCount, const int screenWidth, const int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath, const std::string &networkBinPath) : logPath(logPath), networkBinPath(networkBinPath), screenWidth(screenWidth), screenHeight(screenHeight) {
     int lowerHeightBound = static_cast<int>(pipeGap);
     int upperHeightBound = screenHeight - static_cast<int>(pipeGap) - lowerHeightBound;
     pipeGen.emplace(lowerHeightBound, upperHeightBound);
@@ -23,9 +25,18 @@ FlappyBord::FlappyBord(const int bordCount, const int screenWidth, const int scr
     }
     activations[brainShape.size() - 2] = activation::sigmoid;
 
+    bool binExists = std::filesystem::exists(networkBinPath);
+    if (binExists) {
+        std::cout << "Using network stored in " << networkBinPath << " for bords..." << std::endl;
+    }
+
     int yPos = screenHeight / 3 * 2;
     for (int i = 0; i < bordCount; i++) {
-        bords.emplace_back(0.0, yPos, brainShape, activations, mutationRate, mutationChance);
+        if (binExists) {
+            bords.emplace_back(0.0, yPos, mutationRate, mutationChance, networkBinPath);
+        } else {
+            bords.emplace_back(0.0, yPos, brainShape, activations, mutationRate, mutationChance);
+        }
     }
 
     // Calculate amount of pipe pairs
@@ -150,12 +161,20 @@ void FlappyBord::draw() const {
 
     DrawText(std::format("Generation: {}", generation).c_str(), 10, 10, 30, BLACK);
     DrawText(std::format("Score: {}", score).c_str(), 10, 40, 30, BLACK);
+    DrawText(std::format("Highscore: {}", highscore).c_str(), 10, 70, 30, BLACK);
 }
 
 void FlappyBord::evolve() {
     std::ranges::sort(bords.begin(), bords.end(), [](const Bord &a, const Bord &b) {
         return a.fitness() > b.fitness();
     });
+
+    if (score > highscore) {
+        highscore = score;
+        const Bord &bord = bords[0];
+        std::cout << "Bord beat the highscore! Saving new brain to " << networkBinPath << "..." << std::endl;
+        bord.writeBrain(networkBinPath);
+    }
 
     const size_t numSurvivors = bords.size() / 4; // Keep 25% best bords
 

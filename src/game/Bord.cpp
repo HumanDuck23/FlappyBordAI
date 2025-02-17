@@ -24,6 +24,22 @@ Bord::Bord(const float x, const float y, const std::vector<int> &brainShape, con
     spawnedAt = unixTimestamp();
 }
 
+Bord::Bord(const float x, const float y, const float mutationRate, const float mutationChance, const std::string &networkBinPath) :
+    GameRect(x, y),
+    brain(Network()),
+    mutationRate(mutationRate),
+    mutationChance(mutationChance),
+    initialX(x),
+    initialY(y) {
+
+    brain.loadFromFile(networkBinPath);
+
+    colorGen.emplace(0, 255);
+    randomizeColor();
+
+    spawnedAt = unixTimestamp();
+}
+
 void Bord::flap() {
     dy = 0;
     applyForces(0, -7);
@@ -86,4 +102,8 @@ void Bord::reset() {
     randomizeColor();
 
     dead = false;
+}
+
+void Bord::writeBrain(const std::string &path) const {
+    brain.saveToFile(path);
 }

@@ -23,12 +23,14 @@ private:
 
     int generation = 0;
     int score = 0;
+    int highscore = 0;
     std::string logPath;
+    std::string networkBinPath;
 
     void setPipes();
     void evolve();
 public:
-    explicit FlappyBord(int bordCount, int screenWidth, int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath);
+    explicit FlappyBord(int bordCount, int screenWidth, int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath, const std::string &networkBinPath);
 
     void update();
     void draw() const;

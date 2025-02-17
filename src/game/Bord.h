@@ -35,6 +35,7 @@ private:
     void randomizeColor();
 public:
     explicit Bord(float x, float y, const std::vector<int>& brainShape, const std::vector<float(*)(float)> &activations, float mutationRate, float mutationChance);
+    explicit Bord(float x, float y, float mutationRate, float mutationChance, const std::string &networkBinPath);
 
     void die(float gapDistance = 1000);
     void think(const Pipe &pipe);
@@ -44,6 +45,8 @@ public:
 
     void mutateBrain();
     void reset();
+
+    void writeBrain(const std::string &path) const;
 };
 
 #endif //BORD_H
