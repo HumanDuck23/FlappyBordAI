@@ -38,14 +38,14 @@ void Layer::mutate(const float mutationRate, const float mutationChance) {
     for (auto &row : weights) {
         for (float &weight : row) {
             if (chanceGen.next() < mutationChance) {
-                weight += mutGen.next();
+                weight *= 1.0f + mutGen.next();
             }
         }
     }
 
     for (float &b : bias) {
         if (chanceGen.next() < mutationChance) {
-            b += mutGen.next();
+            b *= 1.0f + mutGen.next();
         }
     }
 }
