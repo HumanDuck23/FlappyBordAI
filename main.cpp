@@ -6,7 +6,7 @@
 #include "raylib.h"
 #include "src/game/FlappyBord.h"
 
-std::string brainShapeStr = "3,5,5,1";
+std::string brainShapeStr = "4,5,5,1";
 std::string logFile = "default_log.txt";
 std::string networkBinPath = "best_bord.bin";
 int framerate = 60;

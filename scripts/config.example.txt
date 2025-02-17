@@ -1,4 +1,4 @@
-brainShape=3,5,5,1
+brainShape=4,5,5,1
 logFile=exp1.txt
 networkBin=best_bord.bin
 framerate=60
