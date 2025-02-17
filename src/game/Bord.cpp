@@ -69,7 +69,7 @@ float Bord::fitness() const {
 }
 
 void Bord::mutateBrain() {
-    brain.mutate(0.2f, 0.2f);
+    brain.mutate(mutationRate, mutationChance);
 }
 
 void Bord::reset() {
