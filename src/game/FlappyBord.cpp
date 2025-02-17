@@ -9,10 +9,7 @@
 
 #include "../math/activation.h"
 
-FlappyBord::FlappyBord(const int bordCount, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath) : logPath(logPath) {
-    screenWidth = GetScreenWidth();
-    screenHeight = GetScreenHeight();
-
+FlappyBord::FlappyBord(const int bordCount, const int screenWidth, const int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath) : logPath(logPath), screenWidth(screenWidth), screenHeight(screenHeight) {
     int lowerHeightBound = static_cast<int>(pipeGap);
     int upperHeightBound = screenHeight - static_cast<int>(pipeGap) - lowerHeightBound;
     pipeGen.emplace(lowerHeightBound, upperHeightBound);

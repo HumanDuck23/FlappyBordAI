@@ -28,7 +28,7 @@ private:
     void setPipes();
     void evolve();
 public:
-    explicit FlappyBord(int bordCount, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath);
+    explicit FlappyBord(int bordCount, int screenWidth, int screenHeight, std::vector<int> &brainShape, float mutationRate, float mutationChance, const std::string &logPath);
 
     void update();
     void draw() const;

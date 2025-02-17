@@ -1,5 +1,6 @@
 #include <chrono>
 #include <iostream>
+#include <string.h>
 #include <unordered_map>
 
 #include "raylib.h"
@@ -10,6 +11,7 @@ std::string logFile = "default_log.txt";
 int framerate = 60;
 float mutationRate = 0.2f;
 float mutationChance = 0.2f;
+bool headless = false;
 
 void parseArguments(const int argc, char *argv[]) {
     std::unordered_map<std::string, std::string> args;
@@ -34,6 +36,9 @@ void parseArguments(const int argc, char *argv[]) {
     if (args.contains("--mutationChance")) {
         mutationChance = std::stof(args["--mutationChance"]);
     }
+    if (args.contains("--headless")) {
+        headless = args["--headless"] == "true";
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -49,19 +54,19 @@ int main(int argc, char *argv[]) {
     constexpr int screenWidth = 1600;
     constexpr int screenHeight = 1200;
 
-    InitWindow(screenWidth, screenHeight, "FlappyBord AI");
+    if (!headless) InitWindow(screenWidth, screenHeight, "FlappyBord AI");
 
-    FlappyBord fb(200, brainShape, mutationRate, mutationChance, logFile);
+    FlappyBord fb(200, screenWidth, screenHeight, brainShape, mutationRate, mutationChance, logFile);
 
     int tickInterval = 1000 / framerate;
 
-    SetTargetFPS(framerate);
+    if (!headless) SetTargetFPS(framerate);
 
     auto time_current = std::chrono::steady_clock::now();
     auto time_last = time_current;
     auto const update_interval = std::chrono::milliseconds{tickInterval};
 
-    while (!WindowShouldClose()) {
+    while (headless || !WindowShouldClose()) {
         time_current = std::chrono::steady_clock::now();
         auto time_d = time_current - time_last;
 
@@ -74,13 +79,15 @@ int main(int argc, char *argv[]) {
         }
 
         // Draw
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
+        if (!headless) {
+            BeginDrawing();
+            ClearBackground(RAYWHITE);
 
-        // Bord drawing
-        fb.draw();
+            // Bord drawing
+            fb.draw();
 
-        EndDrawing();
+            EndDrawing();
+        }
     }
 
     CloseWindow(); // Close window and OpenGL context
