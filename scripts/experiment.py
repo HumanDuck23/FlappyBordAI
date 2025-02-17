@@ -32,7 +32,7 @@ cpp_process = subprocess.Popen(
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,
     universal_newlines=True,
-    bufsize=1
+    text=True
 )
 
 # Start monitoring
@@ -45,6 +45,15 @@ while True:
         break
     if output:
         print(output.strip())
+
+return_code = cpp_process.poll()
+if return_code is not None and return_code != 0:
+    print(f"\n❌ ERROR: The executable crashed with exit code {return_code}.")
+
+    # Capture and display stderr
+    stderr_output = cpp_process.stderr.read().strip()
+    if stderr_output:
+        print("Crash details:\n" + stderr_output)
 
 # Wait for both to be done
 cpp_process.wait()
