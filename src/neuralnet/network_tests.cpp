@@ -35,3 +35,36 @@ void testNetwork() {
     for (float val : copiedOutput) std::cout << val << " ";
     std::cout << "\n";
 }
+
+void testNetworkBin(int mode) {
+    if (mode == 0) {
+        Network net({3, 5, 5, 2}, {activation::relu, activation::relu, activation::sigmoid});
+
+        std::vector<float> input = {1.0f, 0.5f, -1.5f};
+        std::vector<float> output = net.feedForward(input);
+
+        std::cout << "Feed Forward Output: ";
+        for (float val : output) std::cout << val << " ";
+        std::cout << "\n";
+
+        net.mutate(0.5f, 0.3f);
+
+        std::vector<float> mutatedOutput = net.feedForward(input);
+
+        std::cout << "Mutated Feed Forward Output: ";
+        for (float val : mutatedOutput) std::cout << val << " ";
+        std::cout << "\n";
+
+        net.saveToFile("network.bin");
+    } else if (mode == 1) {
+        Network network;
+        network.loadFromFile("network.bin");
+
+        std::vector<float> input = {1.0f, 0.5f, -1.5f};
+        std::vector<float> output = network.feedForward(input);
+
+        std::cout << "Feed Forward Output: ";
+        for (float val : output) std::cout << val << " ";
+        std::cout << "\n";
+    }
+}

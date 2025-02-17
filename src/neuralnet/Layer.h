@@ -21,6 +21,9 @@ public:
     // Getters (for debugging/testing)
     std::vector<std::vector<float>> getWeights() const { return weights; }
     std::vector<float> getBias() const { return bias; }
+
+    void setWeights(const std::vector<std::vector<float>> &weights) { this->weights = weights; }
+    void setBias(const std::vector<float> &bias) { this->bias = bias; }
 };
 
 #endif //LAYER_H

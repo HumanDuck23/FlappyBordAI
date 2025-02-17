@@ -4,5 +4,6 @@
 #include "Network.h"
 
 void testNetwork();
+void testNetworkBin(int mode);
 
 #endif //NETWORK_TESTS_H
