@@ -17,6 +17,7 @@ it are tweaked.
 ## Example
 
 ![Example evolution graph](graph.png)
+
 This example graph shows a basic series of generations evolving to reach a highscore
 of 20000 points. The performance of these networks and evolution is dependent on various
 factors you can configure yourself (see below).
